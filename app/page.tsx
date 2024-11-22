@@ -1,9 +1,11 @@
+import { Typography } from "@/components/ui/design-system/typographie/Typographie";
+
 export default function Home() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+      <Typography variant="lead" component="p">
+        Hello world
+      </Typography>
     </>
   );
 }
