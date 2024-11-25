@@ -29,19 +29,24 @@ interface Props {
     weight?:
         "regular"
         | "medium"
+    color?:
+        "white"
+        |"gray"
+        |"danger"
     className?: string
     children : React.ReactNode
 }
 
 export const Typography = ({
     variant = "h3", // Variant par défaut
-    component : Component = "div", 
+    component : Component = "div",
+    color,
     weight = "regular",
     className, 
     children
 }:Props) => {
 
-    let variantStyle: string = ""
+    let variantStyle: string = "", colorStyle: string =""
     
 
     switch (variant){
@@ -89,9 +94,22 @@ export const Typography = ({
             break
     }
 
+    switch (color){
+        case 'white':
+            colorStyle = "text-yellow"
+            break
+        case 'gray':
+            colorStyle = "decoration-gray-700"
+            break
+        case 'danger':
+            colorStyle = "decoration-danger"
+            break
+    }
+
     return (
         <Component className={clsx(
             variantStyle,
+            colorStyle,
             weight,
             className,
             )}>

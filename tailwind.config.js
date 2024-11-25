@@ -37,9 +37,9 @@ module.exports = {
         warning: "#FEB72F"
       },
       back: {
-        200: "FAF6F0",
-        DEFAULT: "F5EDE0",
-        400: "F0E4D1"
+        200: "#FAF6F0",
+        DEFAULT: "#F5EDE0",
+        400: "#F0E4D1"
       }
     },
     fontSize: {
@@ -117,7 +117,7 @@ module.exports = {
     borderRadius: {
       DEFAULT: '10px',
       full: "9999px"
-    }?
+    },
     extend: {},
   },
   plugins: [],
