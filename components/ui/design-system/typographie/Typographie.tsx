@@ -96,13 +96,13 @@ export const Typography = ({
 
     switch (color){
         case 'white':
-            colorStyle = "text-yellow"
+            colorStyle = "text-white"
             break
         case 'gray':
-            colorStyle = "decoration-gray-700"
+            colorStyle = "text-gray-700"
             break
         case 'danger':
-            colorStyle = "decoration-danger"
+            colorStyle = "text-alert-danger"
             break
     }
 
