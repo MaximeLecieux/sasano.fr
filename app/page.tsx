@@ -1,9 +1,10 @@
+import { Button } from "@/components/ui/design-system/button/Button";
 import { Typography } from "@/components/ui/design-system/typographie/Typographie";
 
 export default function Home() {
   return (
     <>
-    <div className="grid  gap-10 text-center">
+    <div className="grid gap-10">
         <Typography variant="display" component="p">
           Display
         </Typography>
@@ -49,6 +50,18 @@ export default function Home() {
         <Typography variant="lead" component="p" color="danger">
           Ceci est un message d'avertissement
         </Typography>
+    </div>
+    <div className="flex gap-4 p-4">
+      <Button variant="accent">
+        <Typography variant="caption2" component="span">
+            Ceci est un bouton
+        </Typography>
+      </Button>
+      <Button variant="secondary">
+        <Typography variant="caption2" component="span">
+            Ceci est un bouton
+        </Typography>
+      </Button>
     </div>
     </>
   );
