@@ -26,9 +26,6 @@ interface Props {
         | "div"
         | "p"
         | "span"
-    weight?:
-        "regular"
-        | "medium"
     color?:
         "white"
         |"gray"
@@ -41,12 +38,11 @@ export const Typography = ({
     variant = "h3", // Variant par défaut
     component : Component = "div",
     color,
-    weight = "regular",
     className, 
     children
 }:Props) => {
 
-    let variantStyle: string = "", colorStyle: string =""
+    let variantStyle: string = "", colorStyle: string = "", weightStyle: string = ""
     
 
     switch (variant){
@@ -110,7 +106,6 @@ export const Typography = ({
         <Component className={clsx(
             variantStyle,
             colorStyle,
-            weight,
             className,
             )}>
 

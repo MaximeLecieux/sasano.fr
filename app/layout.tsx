@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "@/components/ui/components/navigation/Header";
 
 export const metadata: Metadata = {
   title: "Sasano.fr",
@@ -13,7 +14,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body>
+      <body className="mx-[70px]">
+      <Header />
         {children}
       </body>
     </html>

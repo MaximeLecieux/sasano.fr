@@ -4,7 +4,7 @@ import { Typography } from "@/components/ui/design-system/typographie/Typographi
 export default function Home() {
   return (
     <>
-    <div className="grid gap-10">
+    <div className="grid gap-10 mt-10">
         <Typography variant="display" component="p">
           Display
         </Typography>
