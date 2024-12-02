@@ -43,7 +43,7 @@ export default function Header() {
                     height={99}
                 />
             </div>
-            <div className='ml-[10px]'>
+            <div>
                 <Typography variant='caption1' className='font-bold'>
                     Sasano
                 </Typography>

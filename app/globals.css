@@ -6,7 +6,11 @@
 @layer base {
   html {    
     font-family: "Roboto", system-ui, sans-serif;
-    overflow: hidden;
+    /* overflow: hidden; */
+  }
+
+  button {
+    transition-duration: 300ms;
   }
 }
 

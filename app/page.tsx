@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/design-system/button/Button";
 import { Typography } from "@/components/ui/design-system/typographie/Typographie";
+import { FaFacebook } from "react-icons/fa";
 
 export default function Home() {
   return (
     <>
-    <div className="grid gap-10 mt-10">
+    <div className="grid grid-cols-3 h-5/6">
+      <div className="flex flex-col justify-between h-3/6">
         <Typography variant="display" component="p">
           Display
         </Typography>
@@ -23,7 +25,9 @@ export default function Home() {
         <Typography variant="h5" component="h5">
           Titre h5
         </Typography>
-        <Typography variant="lead" component="p">
+      </div>
+      <div className="flex flex-col justify-between h-3/6">
+      <Typography variant="lead" component="p">
           Ceci est un Lead
         </Typography>
         <Typography variant="body-lg" component="span">
@@ -47,21 +51,23 @@ export default function Home() {
         <Typography variant="caption4" component="p">
         Ceci est un caption 4
         </Typography>
+      </div>
+      <div className="flex flex-col justify-between h-3/6">
         <Typography variant="lead" component="p" color="danger">
           Ceci est un message d'avertissement
         </Typography>
-    </div>
-    <div className="flex gap-4 p-4">
-      <Button variant="accent">
+        <Button variant="accent">
         <Typography variant="caption2" component="span">
             Ceci est un bouton
         </Typography>
-      </Button>
-      <Button variant="secondary">
-        <Typography variant="caption2" component="span">
-            Ceci est un bouton
-        </Typography>
-      </Button>
+        </Button>
+        <Button variant="secondary">
+          <Typography variant="caption2" component="span">
+              Ceci est un bouton
+          </Typography>
+        </Button>
+        <Button variant="icon" icon={FaFacebook}/>
+      </div>
     </div>
     </>
   );
