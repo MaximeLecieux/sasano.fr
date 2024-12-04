@@ -18,13 +18,13 @@ export const ActiveLink = ({
 
     // const router = useRouter()
 
-    const isActive: boolean = useMemo(() =>{  //
+    const isActive: boolean = useMemo(() =>{ 
         return pathname === href
     }, [pathname, href]) 
 
 
     return (
-        <Link href={href} className={clsx(isActive && "text-primary font-bold")}>
+        <Link href={href} className={clsx(isActive && "text-primary font-bold underline")}>
             {children}
         </Link>
     )
