@@ -7,11 +7,13 @@ import { useMemo } from "react"
 interface Props {
     href: string
     children: React.ReactNode
+    onClick?: React.MouseEventHandler<HTMLAnchorElement>
 }
 
 export const ActiveLink = ({
     href,
-    children
+    children,
+    onClick
 }: Props) => {
 
     const pathname = usePathname()
@@ -24,7 +26,7 @@ export const ActiveLink = ({
 
 
     return (
-        <Link href={href} className={clsx(isActive && "text-primary font-bold underline")}>
+        <Link href={href} onClick={onClick} className={clsx(isActive && "text-primary font-bold underline")}>
             {children}
         </Link>
     )

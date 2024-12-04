@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className="bg-back-200 lg:mx-[70px] h-screen">
+      <body className="bg-back-200 h-screen w-screen">
       <Header />
         {children}
       <Footer />

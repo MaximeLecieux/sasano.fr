@@ -14,7 +14,7 @@ export default function Footer() {
     const footerLinks = footerAppLinks.map((link: AppLinks) => {
         if (link.type === LinkTypes.INTERNAL) {
             return (
-                <div className='mr-[30px]'>
+                <div>
                     <ActiveLink key={link.label} href={link.baseUrl}>
                     {link.label}
                     </ActiveLink>
@@ -22,7 +22,7 @@ export default function Footer() {
             );
         } else if (link.type === LinkTypes.EXTERNAL) {
             return (
-                <div className='mr-[30px]'>
+                <div>
                     <a key={link.label} href={link.baseUrl} target="_blank" rel="noopener noreferrer">
                         <Button
                             variant='icon'
@@ -37,7 +37,7 @@ export default function Footer() {
     })
 
   return (
-    <footer className='flex justify-between items-center border-t-2 py-[20px]'>
+    <footer className='flex flex-col-reverse items-center gap-9 md:flex-row md:justify-between  border-t-2 py-[20px] md:px-8'>
         <div>
             <div className='ml-[10px]'>
                 <Typography 
@@ -59,7 +59,7 @@ export default function Footer() {
                 </Link>
             </Typography>
         </div>
-        <div className='flex'>
+        <div className='flex gap-5'>
             {footerLinks}
         </div>
     </footer>
