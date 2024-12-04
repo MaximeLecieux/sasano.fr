@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/ui/components/navigation/Header";
 import Footer from "@/components/ui/components/navigation/Footer";
+import Container from "@/components/ui/design-system/container/Container";
 
 export const metadata: Metadata = {
   title: "Sasano.fr",
@@ -16,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className="bg-back-200 h-screen w-screen">
-      <Header />
-        {children}
-      <Footer />
+        <Header />
+        <Container>
+          {children}
+        </Container>
+        <Footer />
       </body>
     </html>
   );

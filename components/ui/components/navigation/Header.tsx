@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { AppLinks } from '@/lib/types/app-links';
 import { ActiveLink } from './active-link';
 import { LinkTypes } from '@/lib/types/link-types';
-import { headerAppLinks } from './app-links';
+import { navAppLinks } from './app-links';
 import Image from 'next/image';
 import Link from 'next/link';
 import useIsMdOrLess from '@/hooks/useIsMdOrLess';
@@ -22,7 +22,7 @@ export default function Header() {
     }
   };
 
-  const headerLinks = headerAppLinks.map((link: AppLinks) => {
+  const headerLinks = navAppLinks.map((link: AppLinks) => {
     if (link.type === LinkTypes.INTERNAL) {
       return (
         <ActiveLink key={link.label} href={link.baseUrl} onClick={handleLinkClick}>
@@ -35,7 +35,6 @@ export default function Header() {
           key={link.label}
           href={link.baseUrl}
           target="_blank"
-          rel="noopener noreferrer"
         >
           {link.label}
         </a>
