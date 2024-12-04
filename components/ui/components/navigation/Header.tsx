@@ -7,6 +7,7 @@ import { ActiveLink } from './active-link';
 import { LinkTypes } from '@/lib/types/link-types';
 import { headerAppLinks } from './app-links';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -57,19 +58,23 @@ export default function Header() {
 
       {/* Header large */}
       <div className="hidden md:flex justify-between items-center">
-        <div className="flex items-center gap-4">
-          <div className="my-[5px]">
-            <Image src="/images/logo.svg" alt="Logo" width={88} height={99} />
+        <Link href="/">
+          <div className="flex items-center gap-4">
+            <div className="my-[5px]">
+              
+                <Image src="/images/logo.svg" alt="Logo" width={88} height={99} />
+              
+            </div>
+            <div>
+              <Typography variant="caption1" className="font-bold">
+                Sasano
+              </Typography>
+              <Typography variant="caption3" color="gray">
+                Un sac à porter demain
+              </Typography>
+            </div>
           </div>
-          <div>
-            <Typography variant="caption1" className="font-bold">
-              Sasano
-            </Typography>
-            <Typography variant="caption3" color="gray">
-              Un sac à porter demain
-            </Typography>
-          </div>
-        </div>
+        </Link>
         <nav className="flex space-x-4">
           {headerLinks}
         </nav>

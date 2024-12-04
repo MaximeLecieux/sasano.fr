@@ -5,6 +5,7 @@ import { LinkTypes } from '@/lib/types/link-types';
 import { ActiveLink } from './active-link';
 import { Button } from '../../design-system/button/Button';
 import { Typography } from '../../design-system/typographie/Typographie';
+import Link from 'next/link';
 
 export default function Footer() {
 
@@ -37,17 +38,26 @@ export default function Footer() {
 
   return (
     <footer className='flex justify-between items-center border-t-2 py-[20px]'>
-        <div className='flex items-center'>
+        <div>
             <div className='ml-[10px]'>
-            <Typography 
-                variant="caption4"
-            >
-                {`Copyright © ${currentYear} | Propulsed by `}
-                <a href="https://lecieux.fr" target="_blank" className="underline">
-                    {`Maxime LECIEUX EI`}
-                </a>
-            </Typography>
+                <Typography 
+                    variant="caption4"
+                >
+                    {`Copyright © ${currentYear} | Propulsed by `}
+                    <a href="https://lecieux.fr" target="_blank" className="underline">
+                        {`Maxime LECIEUX EI`}
+                    </a>
+                </Typography>
             </div>
+        </div>
+        <div>
+            <Typography
+                variant='caption4'
+            >
+                <Link href="/legal" className='underline'>
+                    Mentions légales
+                </Link>
+            </Typography>
         </div>
         <div className='flex'>
             {footerLinks}
