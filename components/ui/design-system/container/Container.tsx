@@ -8,7 +8,7 @@ export default function Container({
     children
 }: Props) {
   return (
-    <div className='flex justify-center'>
+    <div className='container mx-auto py-11'>
       {children}
     </div>
   )

@@ -14,16 +14,16 @@ export default function Footer() {
     const footerLinks = footerAppLinks.map((link: AppLinks) => {
         if (link.type === LinkTypes.INTERNAL) {
             return (
-                <div>
-                    <ActiveLink key={link.label} href={link.baseUrl}>
+                <div key={link.label}>
+                    <ActiveLink href={link.baseUrl}>
                     {link.label}
                     </ActiveLink>
                 </div>
             );
         } else if (link.type === LinkTypes.EXTERNAL) {
             return (
-                <div>
-                    <a key={link.label} href={link.baseUrl} target="_blank" rel="noopener noreferrer">
+                <div key={link.label}>
+                    <a href={link.baseUrl} target="_blank" rel="noopener noreferrer">
                         <Button
                             variant='icon'
                             icon={link.icon}
@@ -37,7 +37,7 @@ export default function Footer() {
     })
 
   return (
-    <footer className='flex flex-col-reverse items-center gap-9 md:flex-row md:justify-between  border-t-2 py-[20px] md:px-8'>
+    <footer className='flex flex-col-reverse items-center gap-9 md:flex-row md:justify-between  border-t-2 py-[20px] md:px-8 md:fixed bottom-0 w-full'>
         <div>
             <div className='ml-[10px]'>
                 <Typography 

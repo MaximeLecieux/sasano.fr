@@ -23,7 +23,7 @@ export const Button = ({
   className,
   children,
   baseUrl,
-  linkType
+  linkType,
 }: Props) => {
 
   let variantStyle = "";
@@ -47,7 +47,11 @@ export const Button = ({
       variantStyle,
       baseUrl,
       className,
-      "py-[15px] px-[16px] rounded" // Styles par défaut
+      "p-[15px]",
+      {
+        "py-[15px] px-[45px] md:px-[70px] rounded": variant !== "icon",
+      }
+       // Styles par défaut
     )}
   >
     <Typography variant="caption2" component="span">
