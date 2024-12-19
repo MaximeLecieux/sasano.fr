@@ -7,7 +7,7 @@ import { useMemo } from "react"
 interface Props {
     href: string
     children: React.ReactNode
-    onClick?: React.MouseEventHandler<HTMLAnchorElement>
+    onClick?: React.MouseEventHandler<HTMLAnchorElement | HTMLButtonElement>
 }
 
 export const ActiveLink = ({

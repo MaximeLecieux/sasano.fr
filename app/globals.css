@@ -12,10 +12,6 @@
   button {
     transition-duration: 300ms;
   }
-
-  input {
-    cursor: pointer;
-  }
 }
 
 

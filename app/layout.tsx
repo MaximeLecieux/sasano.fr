@@ -18,9 +18,11 @@ export default function RootLayout({
     <html lang="fr">
       <body className="bg-back-200 h-screen w-screen">
         <Header />
+        <div className="relative">
         <Container>
           {children}
         </Container>
+        </div>
         <Footer />
       </body>
     </html>

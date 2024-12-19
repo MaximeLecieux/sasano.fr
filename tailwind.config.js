@@ -23,6 +23,12 @@ module.exports = {
   			'600': '#D6895C',
   			DEFAULT: '#D99066'
   		},
+		tertiary: {
+			'400': '#C2CAB9',
+			'500': '#B8C2AE',
+			'600': '#AEB9A2',
+			DEFAULT: '#9FAC91'
+		},
   		gray: {
   			'300': '#fafafa',
   			'400': '#f2f2f2',

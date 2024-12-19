@@ -15,6 +15,7 @@ interface Props {
     children?: React.ReactNode
     baseUrl?: string
     linkType?: string
+    onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 export const Button = ({
@@ -24,6 +25,7 @@ export const Button = ({
   children,
   baseUrl,
   linkType,
+  onClick
 }: Props) => {
 
   let variantStyle = "";
@@ -43,6 +45,7 @@ export const Button = ({
 
   const buttonElement = (
     <button
+    onClick={onClick}
     className={clsx(
       variantStyle,
       baseUrl,
