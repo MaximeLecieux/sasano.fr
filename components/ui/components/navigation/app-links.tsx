@@ -14,7 +14,7 @@ export const navAppLinks: AppLinks[] = [
     },
     {
         label: "Contacts",
-        baseUrl: "/#",
+        baseUrl: "/contacts",
         type: "internal"
     },
     {

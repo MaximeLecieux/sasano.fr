@@ -28,7 +28,7 @@ export default function page() {
                   </Button>
                 </div>
                 <div>
-                  <Button baseUrl='#'>
+                  <Button baseUrl='/contacts'>
                     Entrer en contact
                   </Button>
                 </div>
