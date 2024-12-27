@@ -2,11 +2,11 @@ import { AppLinks } from "@/lib/types/app-links";
 import { FaFacebook, FaInstagram, FaPinterest } from "react-icons/fa";
 
 export const navAppLinks: AppLinks[] = [
-    // {
-    //     label: "Accueil",
-    //     baseUrl: "/",
-    //     type: "internal"
-    // },
+    {
+        label: "Accueil",
+        baseUrl: "/",
+        type: "internal"
+    },
     {
         label: "Présentation",
         baseUrl: "/presentation",
