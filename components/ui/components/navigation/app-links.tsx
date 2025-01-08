@@ -29,7 +29,7 @@ export const navAppLinks: AppLinks[] = [
     },
     {
         label: "FAQ",
-        baseUrl: "/#",
+        baseUrl: "/FAQ",
         type: "internal"
     }
 ]

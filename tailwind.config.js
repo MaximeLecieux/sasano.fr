@@ -23,12 +23,12 @@ module.exports = {
   			'600': '#D6895C',
   			DEFAULT: '#D99066'
   		},
-		tertiary: {
-			'400': '#C2CAB9',
-			'500': '#B8C2AE',
-			'600': '#AEB9A2',
-			DEFAULT: '#9FAC91'
-		},
+  		tertiary: {
+  			'400': '#C2CAB9',
+  			'500': '#B8C2AE',
+  			'600': '#AEB9A2',
+  			DEFAULT: '#9FAC91'
+  		},
   		gray: {
   			'300': '#fafafa',
   			'400': '#f2f2f2',
@@ -167,7 +167,30 @@ module.exports = {
   		DEFAULT: '10px',
   		full: '9999px'
   	},
-  	extend: {}
+  	extend: {
+  		keyframes: {
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
+  			}
+  		},
+  		animation: {
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
+  		}
+  	}
   }
 }
 
