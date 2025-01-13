@@ -2,5 +2,6 @@ export interface NewsType {
     id: number
     title: string
     description: string
-    img: string
+    img?: string
+    date: string
 }

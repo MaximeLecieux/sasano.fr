@@ -24,7 +24,7 @@ export const navAppLinks: AppLinks[] = [
     },
     {
         label: "Actualités",
-        baseUrl: "/#",
+        baseUrl: "/actuality",
         type: "internal"
     },
     {

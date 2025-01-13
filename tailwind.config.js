@@ -9,6 +9,7 @@ module.exports = {
   theme: {
   	colors: {
   		white: 'rgb(255 255 255)',
+		black: '#03071e',
   		primary: {
   			'200': '#BF5A36',
   			'300': '#AF5331',
@@ -189,7 +190,10 @@ module.exports = {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
+  		},
+		blur: {
+		xs: '2px',
+		}
   	}
   }
 }

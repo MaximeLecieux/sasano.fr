@@ -58,7 +58,7 @@ export default function Header() {
 
       {/* Menu mobile with animation */}
       <nav
-        className={`flex flex-col gap-y-12 pl-5 bg-back fixed top-0 left-0 h-full w-3/4 max-w-sm shadow-lg transform transition-transform duration-300 ease-in-out z-10 ${
+        className={`flex flex-col gap-y-12 pl-5 bg-back fixed top-0 left-0 h-full w-3/4 max-w-sm shadow-lg transform transition-transform duration-300 ease-in-out z-20 ${
             isMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
