@@ -33,17 +33,17 @@ export default function Actuality({
       >
         
         <div className="absolute w-full h-full top-0 left-0  rounded" />
-            <div className={clsx("text transition duration-300 hover:bg-primary-200  p-4", 
+            <div className={clsx("text transition duration-300 hover:bg-primary-200 hover:bg-opacity-75 p-4", 
             isDark === true
               ? "text-white hover:bg-primary-800 hover:text-black"
               : "text-black hover:bg-primary-200 hover:text-white")}>
-              <Typography variant='body-lg' component='h3' className='relative z-10'>
+              <Typography variant='body-lg' component='h3' className='relative z-10 font-semibold'>
                   {title}
               </Typography>
-              <Typography variant='body-base' component='p' className='relative z-10'>
+              <Typography variant='body-base' component='p' className='relative z-10 font-medium'>
                   {description}
               </Typography>
-              <Typography variant='body-sm' component='span' className='relative z-10'>
+              <Typography variant='body-sm' component='span' className='relative z-10 font-medium'>
                   {date}
               </Typography>
             </div>
