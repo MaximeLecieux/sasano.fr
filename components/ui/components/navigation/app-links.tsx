@@ -19,7 +19,7 @@ export const navAppLinks: AppLinks[] = [
     },
     {
         label: "Galerie",
-        baseUrl: "/#",
+        baseUrl: "/galerie",
         type: "internal"
     },
     {

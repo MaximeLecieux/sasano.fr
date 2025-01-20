@@ -26,7 +26,9 @@ export default function Header() {
     if (link.type === LinkTypes.INTERNAL) {
       return (
         <ActiveLink key={link.label} href={link.baseUrl} onClick={handleLinkClick}>
-          {link.label}
+          <Typography variant='body-lg' component='span'>
+            {link.label}
+          </Typography>
         </ActiveLink>
       );
     } else if (link.type === LinkTypes.EXTERNAL) {

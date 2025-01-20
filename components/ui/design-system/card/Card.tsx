@@ -1,27 +1,22 @@
-"use client"
+import clsx from 'clsx'
 import React from 'react'
 import { Typography } from '../typographie/Typographie'
-import clsx from 'clsx'
 import Image from 'next/image'
 
 interface Props {
-    title: string
-    description: string                
-    pathImg?: string,
-    date: string
+    name: string               
+    pathImg: string,
     className?: string
 }
 
-export default function Actuality({
-    title,
-    description,
+export default function Card({
+    name,
     pathImg,
-    date,
     className
 }: Props) {
 
   return (
-    <div className="max-w-xs w-full group/card mb-[24px] rounded shadow-xl">
+    <div className="max-w-xs w-full group/card rounded shadow-xl cursor-pointer">
       <div
         className={clsx(
           "overflow-hidden card  max-w-sm mx-auto flex flex-col justify-between",
@@ -31,7 +26,7 @@ export default function Actuality({
             <div>
             {pathImg && <Image 
               src={pathImg}
-              alt={title}
+              alt={name}
               height="400"
               width="400"
               className="object-contain rounded-t"
@@ -40,13 +35,7 @@ export default function Actuality({
         <div/>
             <div className={clsx("text p-4")}>
               <Typography variant='body-lg' component='h3' className='relative z-10 font-semibold'>
-                  {title}
-              </Typography>
-              <Typography variant='body-base' component='p' className='relative z-10 font-medium'>
-                  {description}
-              </Typography>
-              <Typography variant='body-sm' component='span' className='relative z-10 font-medium'>
-                  {date}
+                  {name}
               </Typography>
             </div>
       </div>
