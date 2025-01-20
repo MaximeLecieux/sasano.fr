@@ -5,6 +5,7 @@
 Responsive au format Tablette et Mobile
 Gérer l'affichage à l'écran pour qu'il tienne sur 100% de la page (scroll uniquement sur le container)
 Ajouter police d'écriture
+Faire une transition sur la navigation entre les pages
 
 # layout.tsx
 

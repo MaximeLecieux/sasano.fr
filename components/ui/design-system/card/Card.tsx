@@ -24,13 +24,13 @@ export default function Card({
         )}
       >
             <div>
-            {pathImg && <Image 
+            <Image 
               src={pathImg}
               alt={name}
               height="400"
               width="400"
               className="object-contain rounded-t"
-            />}
+            />
           </div>
         <div/>
             <div className={clsx("text p-4")}>
