@@ -25,4 +25,5 @@ Modifier l'affichage des cases à cocher
 
 # Page FAQ 
 
-Disposition des questions (ajout d'un espace + ombrage)
+Disposition des questions (ajout d'un espace + ombrage
+

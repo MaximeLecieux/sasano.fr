@@ -1,29 +1,39 @@
+"use client"
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/ui/components/navigation/Header";
 import Footer from "@/components/ui/components/navigation/Footer";
 import Container from "@/components/ui/design-system/container/Container";
+import useIsMdOrLess from "@/hooks/useIsMdOrLess";
 
-export const metadata: Metadata = {
-  title: "Sasano.fr",
-  description: "Ceci est le texte de description de sasano.fr",
-};
+// export const metadata: Metadata = {
+//   title: "Sasano.fr",
+//   description: "Ceci est le texte de description de sasano.fr",
+// };
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const isMdOrLess = useIsMdOrLess();
   return (
     <html lang="fr">
       <body className="bg-back-200 h-screen w-screen">
-        <Header />
-        <div className="relative">
-        <Container>
-          {children}
-        </Container>
+        <div
+        className={`${
+          isMdOrLess ? "flex flex-col min-h-screen" : "grid grid-rows-[auto_1fr_auto] min-h-screen"
+        }`}
+        >
+          <Header/>
+          <div className="relative px-[15px]">
+            <Container>
+              {children}
+            </Container>
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </body>
     </html>
   );

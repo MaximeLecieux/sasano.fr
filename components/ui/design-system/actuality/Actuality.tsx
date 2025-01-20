@@ -27,20 +27,20 @@ export default function Actuality({
     <div className="max-w-xs w-full group/card mb-[24px] rounded shadow-xl">
       <div
         className={clsx(
-          "cursor-pointer overflow-hidden card  max-w-sm mx-auto flex flex-col justify-between",
+          "overflow-hidden card  max-w-sm mx-auto flex flex-col justify-between",
           className
         )}
       >
             <div>
             {pathImg && <Image 
               src={pathImg}
-              alt="jordans"
+              alt={title}
               height="400"
               width="400"
               className="object-contain rounded-t"
             />}
           </div>
-        <div className="" />
+        <div/>
             <div className={clsx("text p-4")}>
               <Typography variant='body-lg' component='h3' className='relative z-10 font-semibold'>
                   {title}

@@ -37,7 +37,7 @@ export default function Footer() {
     })
 
   return (
-    <footer className='flex flex-col-reverse items-center gap-9 md:flex-row md:justify-between  border-t-2 py-[20px] md:px-8 md:fixed bottom-0 w-full'>
+    <footer className='flex flex-col-reverse items-center gap-9 md:flex-row md:justify-between  border-t-2 py-[20px] md:px-8  bottom-0 w-full'>
         <div>
             <div className='ml-[10px]'>
                 <Typography 

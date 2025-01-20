@@ -15,14 +15,21 @@ import { CommentaryType } from "@/lib/types/commentary-types";
 import Link from "next/link";
 import { newsApp } from "@/lib/BDD/news";
 import { NewsType } from "@/lib/types/news-types";
+import useIsMdOrLess from "@/hooks/useIsMdOrLess";
 
 export default function Home() {
 
-  // For news 
+  // For news
+  const isMdOrLarger = useIsMdOrLess()
+  let displayNews = true
+  
+  if(isMdOrLarger){
+    displayNews = false
+  }
   const news = newsApp.slice(-3).map((actuality: NewsType) => {
     if (actuality){
       return (
-        <Link href='#' key={actuality.id}>
+        <Link href='/actuality' key={actuality.id}>
           <div className="bg-tertiary pl-[25px] py-[15px] pr-[105px] rounded-l-[50px]" key={actuality.id}>
             <div>
               <Typography variant="body-lg" component="p">
@@ -142,7 +149,6 @@ export default function Home() {
             autoPlay
             infinite
             autoPlayInterval={4000}
-            autoWidth
             disableDotsControls
             disableButtonsControls
             mouseTracking
@@ -155,9 +161,12 @@ export default function Home() {
             </Button>
           </Link>
         </div>
-        <div className="absolute top-0 right-0 flex flex-col gap-8 pt-11">
+        {displayNews && 
+          <div className="absolute top-0 right-0 flex flex-col gap-8 pt-11">
           {news}
-        </div>
+          </div>
+        }
+        
       </div>
   );
 }

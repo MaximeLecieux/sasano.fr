@@ -1,18 +1,27 @@
-import { useState, useEffect } from 'react';
+
+import { useState, useEffect } from "react";
 
 const useIsMdOrLess = () => {
-  const [isMdOrLarger, setisIsMdOrLess] = useState(() => window.innerWidth >= 768);
+  const [isMdOrLess, setIsMdOrLess] = useState<boolean | null>(null);
 
   useEffect(() => {
+    // Vérifie si le code s'exécute côté client
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const handleResize = () => {
-        setisIsMdOrLess(window.innerWidth <= 768);
+      setIsMdOrLess(window.innerWidth <= 1366);
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    // Initialisation au chargement
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return isMdOrLarger;
+  return isMdOrLess;
 };
 
 export default useIsMdOrLess;
