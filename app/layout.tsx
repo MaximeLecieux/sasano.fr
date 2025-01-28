@@ -20,7 +20,7 @@ export default function RootLayout({
   const isMdOrLess = useIsMdOrLess();
   return (
     <html lang="fr">
-      <body className="bg-back-200 h-screen w-screen">
+      <body className="bg-back-200 h-screen w-screen overflow-x-hidden">
         <div
         className={`${
           isMdOrLess ? "flex flex-col min-h-screen" : "grid grid-rows-[auto_1fr_auto] min-h-screen"

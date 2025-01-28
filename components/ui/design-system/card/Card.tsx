@@ -16,7 +16,7 @@ export default function Card({
 }: Props) {
 
   return (
-    <div className="max-w-xs w-full group/card rounded shadow-xl cursor-pointer">
+    <div className="max-w-xs w-full group/card rounded shadow-xl cursor-pointer transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 duration-300">
       <div
         className={clsx(
           "overflow-hidden card  max-w-sm mx-auto flex flex-col justify-between",
