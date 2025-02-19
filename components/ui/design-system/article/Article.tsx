@@ -4,7 +4,10 @@ import React, { useState } from 'react'
 import { Typography } from '../typographie/Typographie'
 import { Button } from '../button/Button'
 import { Link } from 'react-alice-carousel'
-import Carousel from '../carousel/Carousel'
+import EmblaCarousel from '../carousel/EmblaCarousel'
+import { EmblaOptionsType } from 'embla-carousel'
+import { galerieApp } from '@/lib/BDD/galerie'
+import { GalerieType } from '@/lib/types/galerie-types'
 
 interface Props{
     articleId: number | null
@@ -25,22 +28,26 @@ export default function Article({
     }
 
     const article = articleApp.find((article: ArticleType) => article.id === articleId)
+    const galerieId = galerieApp.find((galerie: GalerieType) => galerie.id === article?.id_galerie)
+    const galeriePath = galerieId?.pathImgs
+    const slide = galeriePath?.length
 
 
     if(!article){
         return <div>Aucun article trouvé</div>
     }
 
+    const OPTIONS: EmblaOptionsType = { dragFree: true, loop: true }
+
+
 
   return (
     <div className=''>
         <div className='grid grid-cols-1 lg:grid-cols-2'>
-            <div className='max-h-[800px] border'>
-                <Carousel
-                        articleId={articleId}
-                />
+            <div className='max-h-[800px]'>
+                <EmblaCarousel slides={galeriePath} options={OPTIONS} />
             </div>
-            <div className={`relative p-[30px] description-container  border
+            <div className={`relative p-[30px] description-container
                 ${
                 isExpanded ? "max-h-[800px] overflow-y-auto" : "max-h-[250px] overflow-hidden"
                 } transition-all duration-500 ease-in-out`

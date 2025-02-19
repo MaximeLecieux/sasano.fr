@@ -7,7 +7,7 @@ import React from 'react'
 
 export default function page() {
 
-  const news = newsApp.map((news: NewsType) => {
+  const news = newsApp.sort((a, b) => b.id - a.id).map((news: NewsType) => {
     if (news){
       return (
         <div key={news.id}>

@@ -34,7 +34,7 @@ export default function page() {
                 </div>
               </div>
               <div>
-                <Typography variant='display' component='span'>SASANO</Typography>
+                <Typography variant='display' component='h1'>SASANO</Typography>
               </div>
             </div>
           </div>

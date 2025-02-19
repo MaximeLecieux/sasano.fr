@@ -16,6 +16,7 @@ import Link from "next/link";
 import { newsApp } from "@/lib/BDD/news";
 import { NewsType } from "@/lib/types/news-types";
 import useIsMdOrLess from "@/hooks/useIsMdOrLess";
+import { displayNameSurname } from "@/hooks/displayNameSurname";
 
 export default function Home() {
 
@@ -88,7 +89,7 @@ export default function Home() {
           </div>
           <div>
             <Typography variant="caption3" component="p">
-              {comment.name}
+              {displayNameSurname(comment.name, comment.surname) }
             </Typography>
           </div>
         </div>
