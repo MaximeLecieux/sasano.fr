@@ -8,6 +8,11 @@ import EmblaCarousel from '../carousel/EmblaCarousel'
 import { EmblaOptionsType } from 'embla-carousel'
 import { galerieApp } from '@/lib/BDD/galerie'
 import { GalerieType } from '@/lib/types/galerie-types'
+import Carousel from '../carousel/Carousel'
+import EmblaCarousel from '../carousel/EmblaCarousel'
+import { EmblaOptionsType } from 'embla-carousel'
+import { galerieApp } from '@/lib/BDD/galerie'
+import { GalerieType } from '@/lib/types/galerie-types'
 
 interface Props{
     articleId: number | null
@@ -23,6 +28,10 @@ export default function Article({
         setIsExpanded((prev) => !prev)
     }
 
+    const OPTIONS: EmblaOptionsType = { dragFree: true, loop: true }
+    
+    
+
     if(articleId === null){
         return <div>Aucun article sélectionné</div>
     }
@@ -31,6 +40,11 @@ export default function Article({
     const galerieId = galerieApp.find((galerie: GalerieType) => galerie.id === article?.id_galerie)
     const galeriePath = galerieId?.pathImgs
     const slide = galeriePath?.length
+    
+    const galerieId = galerieApp.find((galerie: GalerieType) => galerie.id === article?.id_galerie)
+    const galeriePaths = galerieId?.pathImgs
+    const slide = galeriePaths?.length
+    console.log(slide)
 
 
     if(!article){
@@ -46,6 +60,8 @@ export default function Article({
         <div className='grid grid-cols-1 lg:grid-cols-2'>
             <div className='max-h-[800px]'>
                 <EmblaCarousel slides={galeriePath} options={OPTIONS} />
+            <div className='max-h-[800px]'>
+            <EmblaCarousel slides={galeriePaths} options={OPTIONS} />
             </div>
             <div className={`relative p-[30px] description-container
                 ${
