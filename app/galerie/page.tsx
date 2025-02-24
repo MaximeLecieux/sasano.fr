@@ -4,13 +4,12 @@ import Card from '@/components/ui/design-system/card/Card';
 import Catalog from '@/components/ui/design-system/catalog/Catalog';
 import Dialog from '@/components/ui/design-system/dialog/Dialog';
 import { Typography } from '@/components/ui/design-system/typographie/Typographie';
-import { articleApp } from '@/lib/BDD/article';
 import { categoryApp } from '@/lib/BDD/category';
 import { collectionApp } from '@/lib/BDD/collection';
-import { ArticleType } from '@/lib/types/article-types';
 import { CategoryType } from '@/lib/types/category-types';
 import { CollectionType } from '@/lib/types/collection-types';
 import React from 'react'
+import { motion } from "framer-motion";
 
 export default function page() {
 
@@ -36,6 +35,12 @@ export default function page() {
     setSelectedArticleId(articleId)
     setTypeContent("article")
   }
+
+  const pageVariants = {
+    initial: { opacity: 0, x: -50 },
+    animate: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+    exit: { opacity: 0, x: 50, transition: { duration: 0.5 } },
+  };
 
   const categories = categoryApp.map((category: CategoryType) => {
     if (category){
@@ -71,24 +76,31 @@ export default function page() {
   
   return (
     <>
-      <div className='flex flex-col items-center justify-center lg:items-start'>
-        {categories}
-      </div>
+      <motion.div 
+      initial="initial" 
+      animate="animate" 
+      exit="exit" 
+      variants={pageVariants}
+      >
+        <div className='flex flex-col items-center justify-center lg:items-start'>
+          {categories}
+        </div>
 
-      <div className='flex justify-center items-center'>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-        >
-          {typeContent === "catalog" && 
-            <Catalog 
-              setArticle={(articleId: number) => handleClickCatalog(articleId)} 
-              collectionId={selectedCollectionId}
-            />
-          }
-          {typeContent === "article" && <Article articleId={selectedArticleId} />}
-        </Dialog>
-      </div>
+        <div className='flex justify-center items-center'>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+          >
+            {typeContent === "catalog" && 
+              <Catalog 
+                setArticle={(articleId: number) => handleClickCatalog(articleId)} 
+                collectionId={selectedCollectionId}
+              />
+            }
+            {typeContent === "article" && <Article articleId={selectedArticleId} />}
+          </Dialog>
+        </div>
+      </motion.div>
     </>
   )
 }

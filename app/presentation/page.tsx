@@ -1,15 +1,24 @@
+"use client"
 import { Button } from '@/components/ui/design-system/button/Button';
 import { presentationApp } from '@/lib/BDD/presentation'
 import { PresentationType } from '@/lib/types/presentation-types';
 import React from 'react'
 import Image from 'next/image'
 import { Typography } from '@/components/ui/design-system/typographie/Typographie';
+import { motion } from "framer-motion";
 
 export default function page() {
+
+  const pageVariants = {
+    initial: { opacity: 0, x: -50 },
+    animate: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+    exit: { opacity: 0, x: 50, transition: { duration: 0.5 } },
+  };
 
   const presentation = presentationApp.map((pres: PresentationType) => {
     if (pres) {
       return (
+      
         <div className='grid grid-cols-4'>
           <div>
             <Image src={pres.img} alt="Logo" width={250} height={250} />
@@ -46,8 +55,13 @@ export default function page() {
   });
 
   return (
-    <div>
+    <motion.div 
+        initial="initial" 
+        animate="animate" 
+        exit="exit" 
+        variants={pageVariants}
+      >
       {presentation}
-    </div>
+    </motion.div>
   )
 }

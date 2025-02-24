@@ -18,6 +18,7 @@ export default function RootLayout({
 }>) {
 
   const isMdOrLess = useIsMdOrLess();
+
   return (
     <html lang="fr">
       <body className="bg-back-200 h-screen w-screen overflow-x-hidden">
@@ -29,7 +30,7 @@ export default function RootLayout({
           <Header/>
           <div className="relative px-[15px]">
             <Container>
-              {children}
+                {children}
             </Container>
           </div>
           <Footer />

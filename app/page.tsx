@@ -17,8 +17,15 @@ import { newsApp } from "@/lib/BDD/news";
 import { NewsType } from "@/lib/types/news-types";
 import useIsMdOrLess from "@/hooks/useIsMdOrLess";
 import { displayNameSurname } from "@/hooks/displayNameSurname";
+import { motion } from "framer-motion";
 
 export default function Home() {
+
+  const pageVariants = {
+    initial: { opacity: 0, x: -50 },
+    animate: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+    exit: { opacity: 0, x: 50, transition: { duration: 0.5 } },
+  };
 
   // For news
   const isMdOrLarger = useIsMdOrLess()
@@ -99,6 +106,12 @@ export default function Home() {
   })
 
   return (
+    <motion.div 
+              initial="initial" 
+              animate="animate" 
+              exit="exit" 
+              variants={pageVariants}
+    >
       <div className="flex flex-col justify-center items-center gap-16">
         <div>
           <Typography
@@ -169,5 +182,6 @@ export default function Home() {
         }
         
       </div>
+      </motion.div>
   );
 }
