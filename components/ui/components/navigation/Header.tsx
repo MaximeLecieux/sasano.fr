@@ -80,7 +80,7 @@ export default function Header() {
           <div className="flex items-center gap-4">
             <div className="my-[5px]">
               
-                <Image src="/images/logo.svg" alt="Logo" width={88} height={99} />
+                <Image src="/images/logo.svg" alt="Logo" width={110} height={110} />
               
             </div>
             <div>

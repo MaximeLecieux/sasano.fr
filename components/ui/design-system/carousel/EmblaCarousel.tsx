@@ -15,7 +15,7 @@ import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 const TWEEN_FACTOR_BASE = 0.2
 
 type PropType = {
-  slides: string[]
+  slides: string[] | undefined
   options?: EmblaOptionsType
 }
 

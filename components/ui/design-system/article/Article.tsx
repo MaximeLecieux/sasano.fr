@@ -4,10 +4,6 @@ import React, { useState } from 'react'
 import { Typography } from '../typographie/Typographie'
 import { Button } from '../button/Button'
 import { Link } from 'react-alice-carousel'
-import EmblaCarousel from '../carousel/EmblaCarousel'
-import { EmblaOptionsType } from 'embla-carousel'
-import { galerieApp } from '@/lib/BDD/galerie'
-import { GalerieType } from '@/lib/types/galerie-types'
 import Carousel from '../carousel/Carousel'
 import EmblaCarousel from '../carousel/EmblaCarousel'
 import { EmblaOptionsType } from 'embla-carousel'
@@ -40,10 +36,6 @@ export default function Article({
     const galerieId = galerieApp.find((galerie: GalerieType) => galerie.id === article?.id_galerie)
     const galeriePath = galerieId?.pathImgs
     const slide = galeriePath?.length
-    
-    const galerieId = galerieApp.find((galerie: GalerieType) => galerie.id === article?.id_galerie)
-    const galeriePaths = galerieId?.pathImgs
-    const slide = galeriePaths?.length
     console.log(slide)
 
 
@@ -51,17 +43,15 @@ export default function Article({
         return <div>Aucun article trouvé</div>
     }
 
-    const OPTIONS: EmblaOptionsType = { dragFree: true, loop: true }
+    const options: EmblaOptionsType = { dragFree: true, loop: true }
 
 
 
   return (
-    <div className=''>
+    <div>
         <div className='grid grid-cols-1 lg:grid-cols-2'>
             <div className='max-h-[800px]'>
-                <EmblaCarousel slides={galeriePath} options={OPTIONS} />
-            <div className='max-h-[800px]'>
-            <EmblaCarousel slides={galeriePaths} options={OPTIONS} />
+                <EmblaCarousel slides={galeriePath} options={options} />
             </div>
             <div className={`relative p-[30px] description-container
                 ${
@@ -90,7 +80,7 @@ export default function Article({
                     <div className={isExpanded ? "hidden" : "absolute bottom-0 left-0 w-full h-16 pointer-events-none bg-gradient-to-t from-back-200 to-transparent blur-sm"}></div>
                 </div>
             </div>
+            </div>
         </div>
-    </div>
   )
 }
