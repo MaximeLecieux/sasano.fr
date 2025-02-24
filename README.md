@@ -13,7 +13,6 @@ refaire description + titre du site
 
 # Page Présentation
 
-Faire la gestion des sauts de ligne
 Mise en forme responsive
 
 # Page Contact

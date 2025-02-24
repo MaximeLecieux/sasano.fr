@@ -156,7 +156,7 @@ export default function Home() {
             items={comments}
             controlsStrategy="responsive"
           />
-          <Link href="#">
+          <Link href="/commentary">
             <Button variant="secondary">
               Je souhaite laisser un commentaire
             </Button>
