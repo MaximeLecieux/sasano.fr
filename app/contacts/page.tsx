@@ -1,17 +1,36 @@
 "use client"
 import Input from '@/components/ui/design-system/form/input/Input'
 import { Typography } from '@/components/ui/design-system/typographie/Typographie'
-import React from 'react'
+import React, { useRef } from 'react'
 import { CiMail, CiPhone, CiStar } from 'react-icons/ci'
 import { RiContactsLine } from 'react-icons/ri'
 import { motion } from "framer-motion";
+import emailjs from '@emailjs/browser';
 
 export default function contacts() {
 
   const pageVariants = {
     initial: { opacity: 0, x: -50 },
-    animate: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-    exit: { opacity: 0, x: 50, transition: { duration: 0.5 } },
+    animate: { opacity: 1, x: -50, transition: { duration: 1 } },
+  };
+
+  const form = useRef(null);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, {
+        publicKey: 'YOUR_PUBLIC_KEY',
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+        },
+      );
   };
 
   return (
@@ -44,7 +63,7 @@ export default function contacts() {
             </Typography>
           </div>
           <div className='max-w-2xl'>
-            <form action="">
+            <form ref={form} onSubmit={sendEmail}>
               <div className='flex flex-col gap-6 '>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5 justify-between">
                   <Input type="text" label="Nom / Prénom" name="name" icon={RiContactsLine}/>

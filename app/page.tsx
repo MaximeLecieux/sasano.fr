@@ -23,8 +23,7 @@ export default function Home() {
 
   const pageVariants = {
     initial: { opacity: 0, x: -50 },
-    animate: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-    exit: { opacity: 0, x: 50, transition: { duration: 0.5 } },
+    animate: { opacity: 1, x: -50, transition: { duration: 1 } },
   };
 
   // For news
@@ -38,7 +37,7 @@ export default function Home() {
     if (actuality){
       return (
         <Link href='/actuality' key={actuality.id}>
-          <div className="bg-tertiary pl-[25px] py-[15px] pr-[105px] rounded-l-[50px]" key={actuality.id}>
+          <div className="bg-tertiary pl-[25px] py-[15px] pr-[105px] rounded-[50px]" key={actuality.id}>
             <div>
               <Typography variant="body-lg" component="p">
                 {actuality.title}

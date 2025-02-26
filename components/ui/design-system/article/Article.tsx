@@ -50,7 +50,7 @@ export default function Article({
   return (
     <div>
         <div className='grid grid-cols-1 lg:grid-cols-2'>
-            <div className='max-h-[800px]'>
+            <div className='h-[50vh]'>
                 <EmblaCarousel slides={galeriePath} options={options} />
             </div>
             <div className={`relative p-[30px] description-container

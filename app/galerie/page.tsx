@@ -38,8 +38,7 @@ export default function page() {
 
   const pageVariants = {
     initial: { opacity: 0, x: -50 },
-    animate: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-    exit: { opacity: 0, x: 50, transition: { duration: 0.5 } },
+    animate: { opacity: 1, x: -0, transition: { duration: 1 } },
   };
 
   const categories = categoryApp.map((category: CategoryType) => {
@@ -86,7 +85,7 @@ export default function page() {
           {categories}
         </div>
 
-        <div className='flex justify-center items-center'>
+        <div className='absolute flex justify-center items-center'>
           <Dialog
             open={open}
             onClose={handleClose}
