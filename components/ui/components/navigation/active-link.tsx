@@ -26,7 +26,7 @@ export const ActiveLink = ({
 
 
     return (
-        <Link href={href} onClick={onClick} className={clsx(isActive && "text-primary font-bold underline")}>
+        <Link href={href} onClick={onClick} className={clsx(isActive && "text-primary font-bold text-lg underline")}>
             {children}
         </Link>
     )

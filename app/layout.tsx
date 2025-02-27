@@ -21,20 +21,14 @@ export default function RootLayout({
 
   return (
     <html lang="fr">
-      <body className="bg-back-200 h-screen w-screen overflow-x-hidden">
-        <div
-        className={`${
-          isMdOrLess ? "flex flex-col min-h-screen" : "grid grid-rows-[auto_1fr_auto] min-h-screen"
-        }`}
-        >
-          <Header/>
-          <div className="relative px-[15px]">
-            <Container>
-                {children}
-            </Container>
-          </div>
-          <Footer />
+      <body className="bg-back-200 flex flex-col h-screen w-screen overflow-hidden">
+        <Header />  
+        <div className="relative flex-1 overflow-y-auto px-[15px]">
+          <Container>
+            {children}
+          </Container>
         </div>
+        <Footer />
       </body>
     </html>
   );
