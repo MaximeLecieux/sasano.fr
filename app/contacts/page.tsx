@@ -11,8 +11,9 @@ export default function contacts() {
 
   const pageVariants = {
     initial: { opacity: 0, x: -50 },
-    animate: { opacity: 1, x: -50, transition: { duration: 1 } },
+    animate: { opacity: 1, x: -0, transition: { duration: 1 } },
   };
+
 
   const form = useRef<HTMLFormElement>(null)
   const messageRef = useRef<HTMLParagraphElement>(null)

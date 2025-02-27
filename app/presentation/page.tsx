@@ -11,42 +11,46 @@ export default function page() {
 
   const pageVariants = {
     initial: { opacity: 0, x: -50 },
-    animate: { opacity: 1, x: -50, transition: { duration: 1 } },
+    animate: { opacity: 1, x: -0, transition: { duration: 1 } },
   };
+
 
   const presentation = presentationApp.map((pres: PresentationType) => {
     if (pres) {
       return (
       
-        <div className='grid grid-cols-4'>
-          <div>
-            <Image src={pres.img} alt="Logo" width={250} height={250} />
-          </div>
-          <div className='col-span-3'>
-            <div>
-              <Typography variant='body-lg' component='p'>
-                {pres.description}
-              </Typography>
-            </div>
-            <div className='flex items-center justify-between'>
-              <div className='flex gap-4'>
-                <div>
-                  <Button baseUrl='#'>
-                    Visiter ma galerie
-                  </Button>
-                </div>
-                <div>
-                  <Button baseUrl='/contacts'>
-                    Entrer en contact
-                  </Button>
-                </div>
-              </div>
-              <div>
-                <Typography variant='display' component='h1'>SASANO</Typography>
-              </div>
-            </div>
-          </div>
+        <div className='grid grid-cols-4 gap-4' key={pres.id}>
+  <div className='col-span-4 md:col-span-1'>
+    <Image src={pres.img} alt="Logo" width={250} height={250} className="md:block hidden" />
+  </div>
+  <div className='col-span-4 md:col-span-3'>
+    <div>
+      <Typography variant='body-lg' component='p'>
+        {pres.description}
+      </Typography>
+    </div>
+    <div className='flex items-center justify-between flex-col md:flex-row'>
+    <div className='flex flex-col gap-4 m-4 md:flex-row md:mb-0'>
+        <div>
+          <Button baseUrl='/galerie'>
+            Visiter ma galerie
+          </Button>
         </div>
+        <div>
+          <Button baseUrl='/contacts'>
+            Entrer en contact
+          </Button>
+        </div>
+      </div>
+
+      <div className='text-center md:text-left'>
+        <Typography variant='display' component='h1'>SASANO</Typography>
+      </div>
+    </div>
+  </div>
+</div>
+
+
         
       );
     }

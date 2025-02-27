@@ -10,8 +10,9 @@ export default function page() {
 
   const pageVariants = {
     initial: { opacity: 0, x: -50 },
-    animate: { opacity: 1, x: -50, transition: { duration: 1 } },
+    animate: { opacity: 1, x: -0, transition: { duration: 1 } },
   };
+
 
   const news = newsApp.sort((a, b) => b.id - a.id).map((news: NewsType) => {
     if (news){
@@ -19,9 +20,9 @@ export default function page() {
         <div key={news.id}>
           <Actuality
             title={news.title}
-            description={news.description}
+            description={news.description || 'aucune description'} 
             pathImg={news.img}
-            date={news.date}
+            date={news.date || 'aucune date précise'}
           />
         </div>
         

@@ -23,8 +23,9 @@ export default function Home() {
 
   const pageVariants = {
     initial: { opacity: 0, x: -50 },
-    animate: { opacity: 1, x: -50, transition: { duration: 1 } },
+    animate: { opacity: 1, x: -0, transition: { duration: 1 } },
   };
+
 
   // For news
   const isMdOrLarger = useIsMdOrLess()
@@ -50,6 +51,9 @@ export default function Home() {
     }
     return null; // Retourne null si aucun type ne correspond
   })
+
+  const message = newsApp.find((actuality: NewsType) => actuality.important === true)
+
 
   // For buttons nav
   const homeLinks = navAppLinks.map((link: AppLinks) => {
@@ -113,15 +117,19 @@ export default function Home() {
               variants={pageVariants}
     >
       <div className="flex flex-col justify-center items-center gap-16">
-        <div>
-          <Typography
-            variant="lead"
-            component="p"
-            color="danger"
-          >
-            Ceci est un message d'abscence
-          </Typography>
-        </div>
+        
+          {message && message.important && (
+            <div>
+              <Typography
+              variant="lead"
+              component="p"
+              color="danger"
+            >
+              {message.title}
+            </Typography>
+            </div>
+          )}
+
         <div className="flex flex-col gap-6 text-center">
           <Typography
             variant="h1"

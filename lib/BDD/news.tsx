@@ -64,6 +64,11 @@ export const newsApp: NewsType[] = [
         title: "Ceci est le titre actualité 10",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         date: formatDateForDisplay(new Date())
+    },
+    {
+        id: 11,
+        title: "Je suis en vacance ! Ne me dérangez pas",
+        description : "Je reviens soon",
+        important: true
     }
-
 ]

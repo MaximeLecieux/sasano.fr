@@ -1,7 +1,7 @@
+"use client"
 import { Typography } from '@/components/ui/design-system/typographie/Typographie'
 import  Input  from '@/components/ui/design-system/form/input/Input'
 import React from 'react'
-import { CiMail, CiPhone, CiStar } from 'react-icons/ci'
 import { RiContactsLine } from 'react-icons/ri'
 import { motion } from "framer-motion";
 
@@ -11,8 +11,9 @@ export default function page() {
 
   const pageVariants = {
     initial: { opacity: 0, x: -50 },
-    animate: { opacity: 1, x: -50, transition: { duration: 1 } },
+    animate: { opacity: 1, x: -0, transition: { duration: 1 } },
   };
+
 
   return (
     <motion.div 
