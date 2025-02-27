@@ -1,7 +1,7 @@
 "use client"
 import Input from '@/components/ui/design-system/form/input/Input'
 import { Typography } from '@/components/ui/design-system/typographie/Typographie'
-import React, { useRef } from 'react'
+import React, { FormEvent, useRef } from 'react'
 import { CiMail, CiPhone, CiStar } from 'react-icons/ci'
 import { RiContactsLine } from 'react-icons/ri'
 import { motion } from "framer-motion";
@@ -14,28 +14,50 @@ export default function contacts() {
     animate: { opacity: 1, x: -50, transition: { duration: 1 } },
   };
 
-  const form = useRef(null);
+  const form = useRef<HTMLFormElement>(null)
+  const messageRef = useRef<HTMLParagraphElement>(null)
 
-  const sendEmail = (e) => {
+  const sendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, {
-        publicKey: 'YOUR_PUBLIC_KEY',
-      })
-      .then(
-        () => {
-          console.log('SUCCESS!');
-        },
-        (error) => {
-          console.log('FAILED...', error.text);
-        },
-      );
+    if(form.current){
+      emailjs
+        .sendForm(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '', 
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '', 
+          form.current, 
+          {
+          publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '',
+          })
+        .then(
+          () => {
+            if(messageRef.current){
+              messageRef.current.textContent = 'Message reçu 👍 Je vous répond dès que possible !';
+            }
+            
+            setTimeout(() => {
+              if (messageRef.current) {
+                messageRef.current.textContent = '';
+              }
+            }, 6000);
+
+            if (form.current) {
+              form.current.reset();
+            }
+          },
+          (error) => {
+            if (messageRef.current) {
+              messageRef.current.textContent = 'Message non envoyé (service error) 👎';
+            }
+          },
+        );
+    }
   };
 
   return (
     <motion.div 
     initial="initial" 
+    
     animate="animate" 
     exit="exit" 
     variants={pageVariants}
@@ -85,7 +107,7 @@ export default function contacts() {
                   <Input type="submit" label={"Envoyer"} name={"submit"}/>
                   </div>
                 </div>
-                
+                <p ref={messageRef} className="text-center text-2xl"></p>
                 </div>
             </form>
           </div>
