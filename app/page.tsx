@@ -37,9 +37,9 @@ export default function Home() {
     if (actuality){
       return (
         <Link href='/actuality' key={actuality.id}>
-          <div className="bg-tertiary pl-[25px] py-[15px] pr-[105px] rounded-[50px]" key={actuality.id}>
+          <div className="bg-tertiary pl-[25px] py-[15px] pr-[105px] rounded-l-[50px]" key={actuality.id}>
             <div>
-              <Typography variant="body-lg" component="p">
+              <Typography variant="body-lg" component="p" className="max-w-[240px] truncate">
                 {actuality.title}
               </Typography>
             </div>
@@ -105,6 +105,7 @@ export default function Home() {
   })
 
   return (
+    <>
     <motion.div 
               initial="initial" 
               animate="animate" 
@@ -174,13 +175,13 @@ export default function Home() {
             </Button>
           </Link>
         </div>
-        {displayNews && 
-          <div className="absolute top-0 right-0 flex flex-col gap-8 pt-11">
-          {news}
-          </div>
-        }
-        
       </div>
       </motion.div>
+      {displayNews && 
+        <div className="absolute top-0 right-0 flex flex-col gap-8 pt-11">
+        {news}
+        </div>
+      }
+    </>
   );
 }
