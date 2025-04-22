@@ -1,0 +1,78 @@
+name: Build and Publish React App (DEV)
+
+on:
+  #
+  # Triggers the workflow on push or pull request events but only for the selected branch
+  push:
+    branches: [ dev-cicd ] # TODO : replace with 'dev' only
+  pull_request:
+    branches: [ dev-cicd ] # TODO : replace with 'dev' only
+  #
+  # Allows you to run this workflow manually from the Github Actions tab of the repository
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    # Sets the permissions granted to the GITHUB_TOKEN for the actions in this job.
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Cache Node dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project (static files)
+        run: npm run build
+
+      - name: Publish to GitHub Packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: latest-dev
+          path: out/
+          if-no-files-found: error
+          # Maximum 90 days unless changed from the repository settings page.
+          retention-days: 365
+           # artifact with a matching name will be deleted before a new one is uploaded.
+          overwrite: true
+
+      # - name: Setup GitHub Packages Authentication
+      #   run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+
+      # - name: Publish to GitHub Packages
+      #   run: |
+      #     cd out
+      #     echo '{
+      #       "name": "@${{ github.repository_owner }}/${{ github.event.repository.name }}-static",
+      #       "version": "latest-dev",
+      #       "description": "Built static files for ${{ github.repository }}",
+      #       "publishConfig": {
+      #         "registry": "https://npm.pkg.github.com/"
+      #       }
+      #     }' > package.json
+      #     npm publish
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+      # TODO
+      # Deploy to server with SSH/SCP/FTP
