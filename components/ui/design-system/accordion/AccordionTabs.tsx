@@ -3,14 +3,13 @@ import {
 	AccordionContent,
 	AccordionItem,
 } from "@/components/ui/design-system/accordion/Accordion";
-import { questionsApp } from "@/lib/BDD/faq";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { Plus } from "lucide-react";
 import { Typography } from "../typographie/Typographie";
+import { QuestionType } from "@/lib/types/question-types";
 
-const items = questionsApp;
 
-function AccordionTabs() {
+function AccordionTabs({allFAQ} : {allFAQ: QuestionType[]}) {
 	return (
 		<div>
 			<Accordion
@@ -19,7 +18,7 @@ function AccordionTabs() {
 				className="max-w-2xl space-y-6"
 				defaultValue="3"
 			>
-				{items.map((item) => (
+				{allFAQ.map((item) => (
 					<AccordionItem
 						value={`${item.id}`}
 						key={item.id}

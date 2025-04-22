@@ -1,3 +1,5 @@
-export const displayNameSurname = (name: string, surname: string) => {
-    return `${name} ${surname.charAt(0)}.`
+export const displayNameSurname = (firstname: string, lastname: string) => {
+    console.log('displayNameSurname', firstname, lastname)
+    
+    return `${firstname} ${lastname ? lastname.charAt(0) + '.' : ''}`
 }

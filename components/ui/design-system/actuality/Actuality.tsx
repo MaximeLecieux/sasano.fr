@@ -51,7 +51,7 @@ export default function Actuality({
 						component="p"
 						className="relative z-10 font-medium"
 					>
-						{description}
+						<div dangerouslySetInnerHTML={{ __html: description }} />
 					</Typography>
 					<Typography
 						variant="body-sm"

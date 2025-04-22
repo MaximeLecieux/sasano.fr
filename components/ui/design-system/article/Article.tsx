@@ -1,14 +1,12 @@
-import { articleApp } from "@/lib/BDD/article";
+
 import { ArticleType } from "@/lib/types/article-types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Typography } from "../typographie/Typographie";
 import { Button } from "../button/Button";
 import { Link } from "react-alice-carousel";
 // import Carousel from "../carousel/Carousel";
 import EmblaCarousel from "../carousel/EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
-import { galerieApp } from "@/lib/BDD/galerie";
-import { GalerieType } from "@/lib/types/galerie-types";
 
 interface Props {
 	articleId: number | null;
@@ -16,6 +14,29 @@ interface Props {
 
 export default function Article({ articleId }: Props) {
 	const [isExpanded, setIsExpanded] = useState(false);
+
+	const [article, setArticle] = useState<ArticleType>();
+	
+		useEffect(() => {
+				const fetchData = async () => {
+				  const url = `https://directus.submanta.com/items/sasano_articles/${articleId}?fields=*,images.*`;
+		  
+				  try {
+				  const response = await fetch(url);
+				
+				  if (!response.ok ) {
+					throw new Error(`Response status: ${response.status}`);
+				  }
+				  const json = await response.json();
+				  
+				  setArticle(json.data);
+		  
+				  } catch (error:any) {
+				  console.error(error.message);
+				  }
+				};
+				fetchData();
+				},[])
 
 	const clickExpand = () => {
 		setIsExpanded((prev) => !prev);
@@ -26,16 +47,8 @@ export default function Article({ articleId }: Props) {
 	if (articleId === null) {
 		return <div>Aucun article sélectionné</div>;
 	}
-
-	const article = articleApp.find(
-		(article: ArticleType) => article.id === articleId
-	);
-	const galerieId = galerieApp.find(
-		(galerie: GalerieType) => galerie.id === article?.id_galerie
-	);
-	const galeriePath = galerieId?.pathImgs;
-	const slide = galeriePath?.length;
-	console.log(slide);
+	
+	const imagesArray = article?.images.map((img : any) => "https://directus.submanta.com/assets/" + img["directus_files_id"]);
 
 	if (!article) {
 		return <div>Aucun article trouvé</div>;
@@ -43,13 +56,11 @@ export default function Article({ articleId }: Props) {
 
 	const options: EmblaOptionsType = { dragFree: true, loop: true };
 
-	console.log(articleId);
-
 	return (
 		<div>
 			<div className="grid grid-cols-1 lg:grid-cols-2">
 				<div className="h-[50vh]">
-					<EmblaCarousel slides={galeriePath} options={options} />
+					<EmblaCarousel slides={imagesArray} options={options} />
 				</div>
 				<div
 					className={`relative p-[30px] description-container
@@ -65,7 +76,7 @@ export default function Article({ articleId }: Props) {
 								{article.name}
 							</Typography>
 							<Typography variant="body-lg" component="p">
-								{article.description}
+								<div dangerouslySetInnerHTML={{ __html: article.description }}/>
 							</Typography>
 							<Link href="/contacts">
 								<Button>Poser une question</Button>

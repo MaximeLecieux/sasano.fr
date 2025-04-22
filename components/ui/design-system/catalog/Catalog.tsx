@@ -1,6 +1,6 @@
-import { articleApp } from '@/lib/BDD/article'
+
 import { ArticleType } from '@/lib/types/article-types'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '../card/Card'
 
 interface Props{
@@ -13,18 +13,50 @@ export default function Catalog({
     setArticle
 }: Props) {
 
+    const [allArticles, setAllArticles] = useState<ArticleType[]>([]);
+
+
+    useEffect(() => {
+            const fetchData = async () => {
+              const url = "https://directus.submanta.com/items/sasano_articles?filter[id_collection][_eq]="+collectionId;
+      
+              try {
+              const response = await fetch(url);
+
+         
+            
+              if (!response.ok ) {
+                throw new Error(`Response status: ${response.status}`);
+              }
+              const json = await response.json();
+
+            
+              
+              setAllArticles(json.data);
+      
+              } catch (error:any) {
+              console.error(error.message);
+              }
+            };
+            
+            fetchData();
+            
+            },[])
+
+
+
+
     const articles = () =>{
         if(collectionId != null) {
             return(
-                articleApp
-                .filter((article: ArticleType) => article.id_collection === collectionId)
-                .map((article: ArticleType) => (
+                allArticles?.map((article: ArticleType) => (
+                 
                     <div 
                     key={article.id}
                     onClick={() => setArticle(article.id)} // Transmet l'ID de l'article au parent
                     className='cursor-pointer'
                     >
-                        <Card name={article.name} pathImg={article.pathImg} />
+                        <Card name={article.name} pathImg={"https://directus.submanta.com/assets/" + article.pathImage} />
                     </div>
                 ))
             ) 

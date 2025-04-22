@@ -6,20 +6,64 @@ import { Typography } from "@/components/ui/design-system/typographie/Typographi
 import { AppLinks } from "@/lib/types/app-links";
 import { LinkTypes } from "@/lib/types/link-types";
 import { CiMail } from "react-icons/ci";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AliceCarousel from "react-alice-carousel";
 import 'react-alice-carousel/lib/alice-carousel.css';
 import "react-alice-carousel/lib/scss/alice-carousel.scss";
-import { commentsApp } from "@/lib/BDD/commentary";
 import { CommentaryType } from "@/lib/types/commentary-types";
 import Link from "next/link";
-import { newsApp } from "@/lib/BDD/news";
 import { NewsType } from "@/lib/types/news-types";
 import useIsMdOrLess from "@/hooks/useIsMdOrLess";
 import { displayNameSurname } from "@/hooks/displayNameSurname";
 import { motion } from "framer-motion";
 
-export default function Home() {
+export default function Home()
+{
+  const [allNews, setAllNews] = useState<NewsType[]>([]);
+  const [allCommentary, setAllCommentary] = useState<CommentaryType[]>([]);
+
+  useEffect(() => {
+
+    const fetchData = async () => {
+      const url = "https://directus.submanta.com/items/sasano_news";
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+
+        const json = await response.json();
+        setAllNews(json.data);
+
+      } catch (error:any) {
+        console.error(error.message);
+      }
+    };
+
+    fetchData();
+  },[])
+      
+        useEffect(() => {
+      
+      
+        const fetchData = async () => {
+          const url = "https://directus.submanta.com/items/sasano_comments";
+          try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+          }
+      
+          const json = await response.json();
+          setAllCommentary(json.data);
+  
+          } catch (error:any) {
+          console.error(error.message);
+          }
+        };
+      
+        fetchData();
+        },[])
 
   const pageVariants = {
     initial: { opacity: 0, x: -50 },
@@ -34,7 +78,7 @@ export default function Home() {
   if(isMdOrLarger){
     displayNews = false
   }
-  const news = newsApp.slice(-3).map((actuality: NewsType) => {
+  const news = allNews.slice(-2).map((actuality: NewsType) => {
     if (actuality){
       return (
         <Link href='/actuality' key={actuality.id}>
@@ -52,7 +96,7 @@ export default function Home() {
     return null; // Retourne null si aucun type ne correspond
   })
 
-  const message = newsApp.find((actuality: NewsType) => actuality.important === true)
+  const message = allNews.find((actuality: NewsType) => actuality.important === true)
 
 
   // For buttons nav
@@ -88,18 +132,20 @@ export default function Home() {
   };
 
   // For commentary
-  const comments = commentsApp.map((comment: CommentaryType) => {
+ 
+  const comments = allCommentary?.map((comment: CommentaryType) => {
+    console.log(comment)
     if (comment){
       return (
         <div className="flex flex-col gap-4 text-center" key={comment.id} data-value={comment.id}>
           <div>
             <Typography variant="body-lg" component="p">
-              {comment.commentary}
+              {comment.content}
             </Typography>
           </div>
           <div>
             <Typography variant="caption3" component="p">
-              {displayNameSurname(comment.name, comment.surname) }
+              {displayNameSurname(comment.firstName, comment.lastName) }
             </Typography>
           </div>
         </div>

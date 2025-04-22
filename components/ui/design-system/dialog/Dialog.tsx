@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import React from 'react'
 import { IoClose } from "react-icons/io5";
-import { IoMdArrowBack } from "react-icons/io";
 import Article from '../article/Article';
 
 interface Props {

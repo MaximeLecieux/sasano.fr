@@ -4,14 +4,14 @@ import Card from "@/components/ui/design-system/card/Card";
 import Catalog from "@/components/ui/design-system/catalog/Catalog";
 import Dialog from "@/components/ui/design-system/dialog/Dialog";
 import { Typography } from "@/components/ui/design-system/typographie/Typographie";
-import { categoryApp } from "@/lib/BDD/category";
-import { collectionApp } from "@/lib/BDD/collection";
 import { CategoryType } from "@/lib/types/category-types";
 import { CollectionType } from "@/lib/types/collection-types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export default function GalleryPage() {
+	const [allCategory, setAllCategory] = useState<CategoryType[]>([]);
+	const [allCollection, setAllCollection] = useState<CollectionType[]>([]);
 	const [open, setOpen] = useState(false);
 	const [typeContent, setTypeContent] = useState<string | null>(null);
 	const [selectedCollectionId, setSelectedCollectionId] = useState<
@@ -20,6 +20,43 @@ export default function GalleryPage() {
 	const [selectedArticleId, setSelectedArticleId] = useState<number | null>(
 		null
 	);
+
+	useEffect(() => {
+		const fetchData = async () => {
+		  const url = "https://directus.submanta.com/items/sasano_categories";
+		  const url2 = "https://directus.submanta.com/items/sasano_collections";
+
+		  try {
+		  const response = await fetch(url);
+		  const response2 = await fetch(url2);
+		
+		  if (!response.ok || !response2.ok ) {
+			throw new Error(`Response status: ${response.status}`);
+		  }
+		  const json = await response.json();
+		  const json2 = await response2.json();
+		  setAllCategory(json.data);
+		  setAllCollection(json2.data);
+  
+		  } catch (error:any) {
+		  console.error(error.message);
+		  }
+		};
+		fetchData();
+		},[])
+
+
+const categoryWithCollections = allCategory.map((category) => {
+		const collections = allCollection.filter(
+			(collection) => collection.id_category === category.id
+		);
+		return {
+			...category,
+			collections: collections
+			,
+		};
+	});
+
 
 	const handleClickOpen = (collectionId: number) => {
 		setTypeContent("catalog");
@@ -44,7 +81,9 @@ export default function GalleryPage() {
 		animate: { opacity: 1, x: -0, transition: { duration: 1 } },
 	};
 
-	const categories = categoryApp.map((category: CategoryType) => {
+	type CategoryWithCollections = CategoryType & { collections: CollectionType[] };
+
+	const categories = categoryWithCollections?.map((category: CategoryWithCollections) => {
 		if (category) {
 			return (
 				<div key={category.id}>
@@ -54,12 +93,7 @@ export default function GalleryPage() {
 						</Typography>
 					</div>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-center items-center">
-						{collectionApp
-							.filter(
-								(collection: CollectionType) =>
-									collection.id_category === category.id
-							)
-							.map((collection: CollectionType) => (
+						{category.collections.map((collection: any) => (
 								<div
 									onClick={() => {
 										handleClickOpen(collection.id);
@@ -67,7 +101,7 @@ export default function GalleryPage() {
 									className="justify-center items-center flex"
 									key={collection.id}
 								>
-									<Card name={collection.name} pathImg={collection.pathImg} />
+									<Card name={collection.name} pathImg={'https://directus.submanta.com/assets/'+collection.pathImg} />
 								</div>
 							))}
 					</div>

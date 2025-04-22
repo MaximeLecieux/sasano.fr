@@ -1,24 +1,54 @@
 "use client";
 import { Button } from "@/components/ui/design-system/button/Button";
-import { presentationApp } from "@/lib/BDD/presentation";
 import { PresentationType } from "@/lib/types/presentation-types";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Typography } from "@/components/ui/design-system/typographie/Typographie";
 import { motion } from "framer-motion";
 
 export default function Presentationpage() {
+
+  const [presentation, setPresentation] = useState<PresentationType>();
+    
+      useEffect(() => {
+    
+    
+      const fetchData = async () => {
+        const url = "https://directus.submanta.com/items/sasano_presentation";
+        try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+    
+        const json = await response.json();
+        setPresentation(json.data);
+
+        } catch (error:any) {
+        console.error(error.message);
+        }
+      };
+    
+      fetchData();
+      },[])
+
 	const pageVariants = {
 		initial: { opacity: 0, x: -50 },
 		animate: { opacity: 1, x: -0, transition: { duration: 1 } },
 	};
 
-	const presentation = presentationApp.map((pres: PresentationType) => {
-		if (pres) {
-			return (
-				<div className="grid grid-cols-4 gap-4" key={pres.id}>
+
+
+	return (
+		<motion.div
+			initial="initial"
+			animate="animate"
+			exit="exit"
+			variants={pageVariants}
+		>
+			<div className="grid grid-cols-4 gap-4">
 					<div className="col-span-4 md:col-span-1">
 						<img
-							src={pres.img}
+							src={'https://directus.submanta.com/assets/'+presentation?.img}
 							alt="Logo"
 							width={250}
 							height={250}
@@ -28,7 +58,7 @@ export default function Presentationpage() {
 					<div className="col-span-4 md:col-span-3">
 						<div>
 							<Typography variant="body-lg" component="p">
-								{pres.description}
+				<div dangerouslySetInnerHTML={{ __html: presentation?.description || "" }} />
 							</Typography>
 						</div>
 						<div className="flex items-center justify-between flex-col md:flex-row">
@@ -49,19 +79,6 @@ export default function Presentationpage() {
 						</div>
 					</div>
 				</div>
-			);
-		}
-		return null;
-	});
-
-	return (
-		<motion.div
-			initial="initial"
-			animate="animate"
-			exit="exit"
-			variants={pageVariants}
-		>
-			{presentation}
 		</motion.div>
 	);
 }
