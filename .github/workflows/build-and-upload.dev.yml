@@ -51,28 +51,26 @@ jobs:
           name: latest-dev
           path: out/
           if-no-files-found: error
-          # Maximum 90 days unless changed from the repository settings page.
-          retention-days: 365
-           # artifact with a matching name will be deleted before a new one is uploaded.
+          retention-days: 30 # TODO Make it 90 ?
           overwrite: true
 
       # - name: Setup GitHub Packages Authentication
       #   run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
 
-      # - name: Publish to GitHub Packages
-      #   run: |
-      #     cd out
-      #     echo '{
-      #       "name": "@${{ github.repository_owner }}/${{ github.event.repository.name }}-static",
-      #       "version": "latest-dev",
-      #       "description": "Built static files for ${{ github.repository }}",
-      #       "publishConfig": {
-      #         "registry": "https://npm.pkg.github.com/"
-      #       }
-      #     }' > package.json
-      #     npm publish
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish to GitHub Packages
+        run: |
+          cd out
+          echo '{
+            "name": "@${{ github.repository_owner }}/${{ github.event.repository.name }}-static",
+            "version": "latest-dev",
+            "description": "Built static files for ${{ github.repository }}",
+            "publishConfig": {
+              "registry": "https://npm.pkg.github.com/"
+            }
+          }' > package.json
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
       # TODO
       # Deploy to server with SSH/SCP/FTP
