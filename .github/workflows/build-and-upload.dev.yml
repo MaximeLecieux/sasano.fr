@@ -88,4 +88,5 @@ jobs:
           key: ${{ secrets.DEV_SSH_KEY }}
           source: "out/*"
           target: /home/jetnxzsd/public_html
+          strip_components: 1
           rm: true
