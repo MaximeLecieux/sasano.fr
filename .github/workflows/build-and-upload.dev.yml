@@ -81,3 +81,12 @@ jobs:
     
       # TODO
       # Deploy to server with SSH/SCP/FTP
+      - name: Upload files to server using SSH key
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ vars.DEV_HOST }}
+          username: ${{ vars.DEV_USERNAME }}
+          port: ${{ vars.DEV_PORT }}
+          key: ${{ secrets.DEV_SSH_KEY }}
+          source: "out"
+          target: /home/jetnxzsd/public_html
