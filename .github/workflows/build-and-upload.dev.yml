@@ -87,5 +87,5 @@ jobs:
           port: ${{ vars.DEV_PORT }}
           key: ${{ secrets.DEV_SSH_KEY }}
           source: "out/*"
-          target: /home/jetnxzsd/public_html$
+          target: /home/jetnxzsd/public_html
           rm: true
