@@ -83,6 +83,7 @@ jobs:
 
   publish-on-test-server:
     runs-on: ubuntu-latest
+    needs: build-and-store
 
     steps:
       #
