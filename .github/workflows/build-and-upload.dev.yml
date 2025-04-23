@@ -13,9 +13,7 @@ on:
 
 jobs:
   build-and-publish:
-    runs-on: ubuntu-latest
-    # TODO : lighter image ?
-    # runs-on: ubuntu-22.04-minimal
+    runs-on: ubuntu-22.04-minimal
 
     # Sets the permissions granted to the GITHUB_TOKEN for the actions in this job.
     permissions:
@@ -30,8 +28,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@${{ github.repository_owner }}'
+          # registry-url: 'https://npm.pkg.github.com'
+          # scope: '@${{ github.repository_owner }}'
 
       - name: Cache Node dependencies
         uses: actions/cache@v3
@@ -56,33 +54,30 @@ jobs:
       - name: Build project (static files)
         run: npm run build
 
-      - name: Publish to GitHub Packages
+      - name: Store files as artifact
         uses: actions/upload-artifact@v4
         with:
           name: latest-dev
           path: out/
           if-no-files-found: error
-          retention-days: 30 # TODO Make it 90 ?
+          retention-days: 90
           overwrite: true
 
-      # - name: Setup GitHub Packages Authentication
-      #   run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-
-      - name: Publish to GitHub Packages
-        run: |
-          cd out
-          echo '{
-            "name": "@${{ github.repository_owner }}/${{ github.event.repository.name }}-static",
-            "version": "${{ steps.package-version.outputs.version }}",
-            "description": "Built static files for ${{ github.repository }}",
-            "publishConfig": {
-              "registry": "https://npm.pkg.github.com/",
-              "tag": "latest-dev"
-            }
-          }' > package.json
-          npm publish --tag latest-dev
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Publish to GitHub Packages
+      #   run: |
+      #     cd out
+      #     echo '{
+      #       "name": "@${{ github.repository_owner }}/${{ github.event.repository.name }}-static",
+      #       "version": "${{ steps.package-version.outputs.version }}",
+      #       "description": "Built static files for ${{ github.repository }}",
+      #       "publishConfig": {
+      #         "registry": "https://npm.pkg.github.com/",
+      #         "tag": "latest-dev"
+      #       }
+      #     }' > package.json
+      #     npm publish --tag latest-dev
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
       # TODO
       # Deploy to server with SSH/SCP/FTP
