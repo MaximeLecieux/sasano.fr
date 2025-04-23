@@ -4,15 +4,15 @@ on:
   #
   # Triggers the workflow on push or pull request events but only for the selected branch
   push:
-    branches: [ dev-cicd ] # TODO : replace with 'dev' only
+    branches: [ dev, dev-cicd ]
   pull_request:
-    branches: [ dev-cicd ] # TODO : replace with 'dev' only
+    branches: [ dev, dev-cicd ]
   #
   # Allows you to run this workflow manually from the Github Actions tab of the repository
   workflow_dispatch:
 
 jobs:
-  build-and-publish:
+  build-and-store:
     runs-on: ubuntu-latest
 
     # Sets the permissions granted to the GITHUB_TOKEN for the actions in this job.
@@ -21,16 +21,17 @@ jobs:
       packages: write
 
     steps:
+      #
       - name: Checkout repository
         uses: actions/checkout@v3
-
+      #
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           # registry-url: 'https://npm.pkg.github.com'
           # scope: '@${{ github.repository_owner }}'
-
+      #
       - name: Cache Node dependencies
         uses: actions/cache@v3
         with:
@@ -40,21 +41,22 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-
+      #
       - name: Install dependencies
         run: npm ci
-
+      #
       - name: Get version from package.json
         id: package-version
         run: |
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
           echo "version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
           echo "Package version: $PACKAGE_VERSION"
-
+      #
       - name: Build project (static files)
         run: npm run build
-
+      #
       - name: Store files as artifact
+        id: artifact-upload-step
         uses: actions/upload-artifact@v4
         with:
           name: latest-dev
@@ -62,7 +64,7 @@ jobs:
           if-no-files-found: error
           retention-days: 90
           overwrite: true
-
+      #
       # - name: Publish to GitHub Packages
       #   run: |
       #     cd out
@@ -78,15 +80,27 @@ jobs:
       #     npm publish --tag latest-dev
       #   env:
       #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
+
+  publish-on-test-server:
+    runs-on: ubuntu-latest
+
+    steps:
+      #
+      - name: Get artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ steps.artifact-upload-step.outputs.artifact-id }}
+          path: distfiles
+      #    
       - name: Upload files to server using SSH key
         uses: appleboy/scp-action@v0.1.7
         with:
+          # TODO move these 'vers' to 'secrets'
           host: ${{ vars.DEV_HOST }}
           username: ${{ vars.DEV_USERNAME }}
           port: ${{ vars.DEV_PORT }}
           key: ${{ secrets.DEV_SSH_KEY }}
-          source: "out/*"
+          source: distfiles/*
           target: /home/jetnxzsd/public_html
-          strip_components: 1
           rm: true
+          # strip_components: 1
