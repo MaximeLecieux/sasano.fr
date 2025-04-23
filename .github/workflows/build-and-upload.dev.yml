@@ -104,4 +104,7 @@ jobs:
           source: distfiles/*
           target: /home/jetnxzsd/public_html
           rm: true
-          strip_components: 1
+          # Remove two parent folders
+          # 1 -> 'distfiles' (added by scp-action)
+          # 2 -> 'latest-dev' (added by download-artifact)
+          strip_components: 2
