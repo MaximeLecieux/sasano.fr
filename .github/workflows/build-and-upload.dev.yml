@@ -104,4 +104,4 @@ jobs:
           source: distfiles/*
           target: /home/jetnxzsd/public_html
           rm: true
-          # strip_components: 1
+          strip_components: 1
