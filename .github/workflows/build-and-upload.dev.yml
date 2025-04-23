@@ -13,7 +13,7 @@ on:
 
 jobs:
   build-and-publish:
-    runs-on: ubuntu-22.04-minimal
+    runs-on: ubuntu-latest
 
     # Sets the permissions granted to the GITHUB_TOKEN for the actions in this job.
     permissions:
